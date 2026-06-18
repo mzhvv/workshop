@@ -2,34 +2,42 @@ name: update-workshop-list
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Запускается каждый день в полночь
-  workflow_dispatch:      # Позволяет запускать вручную из интерфейса GitHub
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write      # Чтобы Action мог обновить README
+      contents: write
     
     steps:
       - uses: actions/checkout@v4
       
       - name: Fetch repositories with topic mzhvv-workshop
         run: |
-          # Получаем список репозиториев через GitHub API
           curl -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/users/mzhvv/repos?per_page=100" > repos.json
+            "https://api.github.com/users/mzhvv/repos?per_page=100" > repos.json
           
           # Генерируем README.md с проверкой, что репозиторий принадлежит mzhvv
-          echo "# 🛠️ Мой Workshop-индекс" > README.md
-          echo "" >> README.md
-          echo "Автоматически обновляемый список всех репозиториев с темой \`mzhvv-workshop\`, созданных [mzhvv](https://github.com/mzhvv)." >> README.md
+          echo "# workshop" > README.md
           echo "" >> README.md
           echo "| Репозиторий | Описание | Язык | Обновлён |" >> README.md
           echo "|-------------|----------|------|----------|" >> README.md
           
           # Фильтруем по владельцу и теме (для надёжности)
-          jq -r '.[] | select(.owner.login == "mzhvv" and .topics != null and (.topics | contains(["mzhvv-workshop"]))) | "| [\(.name)](\(.html_url)) | \(.description // "—") | \(.language // "—") | \(.updated_at[0:10]) |"' repos.json >> README.md 
+          jq -r '.[] \
+            | select( \
+              (.owner.login == "mzhvv" and .topics != null) and \
+              (.topics | contains(["mzhvv-workshop"])) and \
+              .name != "workshops" \
+              ) \
+
+            | "| [\(.name)](\(.html_url)) \
+            | \(.description // "—") \
+            | \(.language // "—") \
+            | \(.updated_at[0:10]) \
+            |"' repos.json >> README.md
       
       - name: Commit and push if changed
         run: |
