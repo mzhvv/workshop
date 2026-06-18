@@ -5,4 +5,6 @@ hands-on growth 🎯
 *auto-update workshop list!*
 | repositories | website |
 |--------------|---------|
-| [react-dev](https://github.com/mzhvv/react-dev) |  |
+| [react-dev](https://github.com/mzhvv/react-dev)     
+  | 
+  |
