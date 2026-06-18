@@ -32,7 +32,7 @@ jobs:
           echo "| ------------ | -------- |" >> README.md
           jq -r '.[] 
             | select(.owner.login == "mzhvv" and .topics != null and (.topics | contains(["mzhvv-workshop"]))) 
-            | "| [\(.name)](\(.html_url)) | \(.homepage // "—") |"' repos.json >> README.md
+            | "| [\(.name)](\(.html_url)) | \(.homepage // "" | if . == "" then "—" else . end) |"' repos.json >> README.md
 
           # 2
           echo "## workshop list:" >> README.md
@@ -40,7 +40,7 @@ jobs:
           echo "| ------------ | ----------- | -------- | ---------- | -------- |" >> README.md
           jq -r '.[] 
             | select(.owner.login == "mzhvv" and .topics != null and (.topics | contains(["mzhvv-workshop"]))) 
-            | "| [\(.name)](\(.html_url)) | \(.description // "—") | \(.language // "—") | \(.updated_at[0:10]) | \(.homepage // "—") |"' repos.json >> README.md
+            | "| [\(.name)](\(.html_url)) | \(.description // "—") | \(.language // "—") | \(.updated_at[0:10]) | \(.homepage // "" | if . == "" then "—" else . end) |"' repos.json >> README.md
       
       - name: Commit and push if changed
         run: |
