@@ -29,8 +29,8 @@ jobs:
           echo "" >> README.md
           echo "## workshop list:" >> README.md
           echo "auto-update workshop list!" >> README.md
-          echo "| Репозиторий | Описание | Язык | Обновлён |" >> README.md
-          echo "|-------------|----------|------|----------|" >> README.md
+          echo "| repositories | website |" >> README.md
+          echo "|--------------|---------|" >> README.md
           
           #
           jq -r '.[] 
@@ -40,9 +40,7 @@ jobs:
                 .name != "workshops"
               )
             | "| [\(.name)](\(.html_url)) 
-            | \(.description // "—") 
-            | \(.language // "—") 
-            | \(.updated_at[0:10]) 
+            | \(.homepage // "—") 
             |"' repos.json >> README.md
       
       - name: Commit and push if changed
