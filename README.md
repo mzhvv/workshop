@@ -9,20 +9,7 @@ hands-on growth 🎯
   | 
   |
 ## workshop list:
-| Репозиторий | Описание | Язык | Обновлён |
-|-------------|----------|------|----------|
-| [react-dev](https://github.com/mzhvv/react-dev) 
-  | — 
-  | TypeScript 
-  | 2026-06-16 
-  |
-| [workshop](https://github.com/mzhvv/workshop) 
-  | hands-on growth 🎯  
-  | — 
-  | 2026-06-18 
-  |
-## workshop list:
-| Репозиторий | Описание | Язык | Обновлён |
-|-------------|----------|------|----------|
-| [react-dev](https://github.com/mzhvv/react-dev) | — | TypeScript | 2026-06-16 |
-| [workshop](https://github.com/mzhvv/workshop) | hands-on growth 🎯  | — | 2026-06-18 |
+| Репозиторий | Описание | Язык | Обновлён | homepage |
+|-------------|----------|------|----------| -------- |
+| [react-dev](https://github.com/mzhvv/react-dev) | — | TypeScript | 2026-06-16 |  |
+| [workshop](https://github.com/mzhvv/workshop) | hands-on growth 🎯  | — | 2026-06-18 | https://mzhvv.github.io/workshop |
