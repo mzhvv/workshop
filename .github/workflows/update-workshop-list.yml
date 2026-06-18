@@ -28,23 +28,14 @@ jobs:
 
           # 1
           echo "## workshop list:" >> README.md
-          echo "*auto-update workshop list!*" >> README.md
-          echo "| repositories | website |" >> README.md
-          echo "|--------------|---------|" >> README.md
-          jq -r '.[] 
-            | select(
-                (.owner.login == "mzhvv" and .topics != null) and
-                (.topics | contains(["mzhvv-workshop"])) and
-                .name != "workshop"
-              )
-            | "| [\(.name)](\(.html_url))     
-            | \(.homepage // "???")
-            |"' repos.json >> README.md
+          echo "| repositories | homepage |" >> README.md
+          echo "| ------------ | -------- |" >> README.md
+          jq -r '.[] | select(.owner.login == "mzhvv" and .topics != null and (.topics | contains(["mzhvv-workshop"]))) | "| [\(.name)](\(.html_url)) | \(.homepage // "???") |"' repos.json >> README.md
 
           # 2
           echo "## workshop list:" >> README.md
-          echo "| Репозиторий | Описание | Язык | Обновлён | homepage |" >> README.md
-          echo "|-------------|----------|------|----------| -------- |" >> README.md
+          echo "| repositories | description | language | updated_at | homepage |" >> README.md
+          echo "| ------------ | ----------- | -------- | ---------- | -------- |" >> README.md
           jq -r '.[] | select(.owner.login == "mzhvv" and .topics != null and (.topics | contains(["mzhvv-workshop"]))) | "| [\(.name)](\(.html_url)) | \(.description // "—") | \(.language // "—") | \(.updated_at[0:10]) | \(.homepage // "???") |"' repos.json >> README.md
       
       - name: Commit and push if changed
