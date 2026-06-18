@@ -26,7 +26,9 @@ jobs:
           echo "hands-on growth 🎯" >> README.md
           echo "" >> README.md
 
-          #
+          echo "## workshop list:" >> README.md
+          echo "| repositories | homepage |" >> README.md
+          echo "| ------------ | -------- |" >> README.md
           jq -r '.[] 
             | select(
                 .owner.login == "mzhvv" and
